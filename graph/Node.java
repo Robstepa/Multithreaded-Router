@@ -1,10 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Michal Hanebach on 14.06.18, 13:28
- * Contact: michal.hanebach@gmail.com
- */
 public class Node {
 
     private String data;
