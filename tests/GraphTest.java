@@ -1,3 +1,5 @@
+import graph.Graph;
+import graph.Node;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
