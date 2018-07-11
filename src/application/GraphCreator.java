@@ -84,10 +84,12 @@ class GraphCreator{
         for (Node aNodeList : nodeList) {
             Node node = graph.getNodeByName(aNodeList.getData());
             List<Node> list = node.getNeighbors();
+            StringBuilder nodes = new StringBuilder();
             for (Node l : list) {
-                System.out.println(String.format("%s --> size: %d, contains: %s", node.getData(),
-                        aNodeList.getNeighbors().size(), l.getData()));
+                nodes.append(l.getData() + " ");
             }
+            System.out.println(String.format("%s --> size: %d, contains: %s", node.getData(),
+                    aNodeList.getNeighbors().size(), nodes));
         }
     }
 }
