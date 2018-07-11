@@ -65,4 +65,62 @@ public class Graph {
         }
         return false;
     }
+
+
+    public List<Node> shortestPathUnweighted(Node startNode, Node endNode) {
+
+        final String startName = startNode.getData();
+        final String endName = endNode.getData();
+
+        Map<String, Boolean> visited = new HashMap<>();
+        Map<String, Integer> dist = new HashMap<>();
+        Map<String, String> predecessors = new HashMap<>();
+
+        for (Node node : nodes) {
+            visited.put(node.getData(), false);
+            dist.put(node.getData(), -1);
+            predecessors.put(node.getData(), null);
+        }
+
+        ArrayDeque<Node> q = new ArrayDeque<>();
+
+        visited.put(startName, true);
+        dist.put(startName, 0);
+        q.offerFirst(startNode);
+
+        boolean endFound = false;
+        while(!endFound && !q.isEmpty()) {
+
+            Node former = q.pollFirst();
+            for (Node neighbor : former.getNeighbors()) {
+
+                if (!visited.get(neighbor.getData())) {
+                    // mark as visited
+                    visited.put(neighbor.getData(), true);
+                    // update distance - the graph is unweighted hence the 1
+                    dist.put(neighbor.getData(), dist.get(former.getData()) + 1);
+                    // save predecessor
+                    predecessors.put(neighbor.getData(), former.getData());
+                    // add neighbor for further traversal
+                    q.offerLast(neighbor);
+                    if (neighbor.getData().equals(endName)) {
+                        endFound = true;
+                    }
+                }
+                if (endFound) break;
+            }
+        }
+
+        List<Node> result = new ArrayList<>();
+        if (endFound) {
+            // compose the route by reverse lookup from endName to startName
+            String reverseIter = endName;
+            result.add(startNode);
+            while (predecessors.get(reverseIter) != null) {
+                result.add(1, getNodeByName(reverseIter));
+                reverseIter = predecessors.get(reverseIter);
+            }
+        }
+        return result;
+    }
 }
