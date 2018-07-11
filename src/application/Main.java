@@ -1,9 +1,9 @@
-import graph.Graph;
+package application;
 
 public class Main {
 
     public static void main(String[] args) {
-        GraphCreator grc = new GraphCreator();
-        grc.runGraphCreator();
+        GraphCreator graphCreator = new GraphCreator();
+        graphCreator.run();
     }
 }
