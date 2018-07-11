@@ -32,28 +32,24 @@ public class GraphTest {
 
         nodeA.addNeighbor(nodeB);
         nodeA.addNeighbor(nodeE);
-
         nodeB.addNeighbor(nodeC);
         nodeB.addNeighbor(nodeD);
-
         nodeC.addNeighbor(nodeF);
-
         nodeD.addNeighbor(nodeA);
         nodeD.addNeighbor(nodeF);
-
         nodeF.addNeighbor(nodeC);
         nodeF.addNeighbor(nodeD);
         nodeF.addNeighbor(nodeG);
 
-        assertEquals(true, graph.BFS("B"));
-        assertEquals(true, graph.BFS("C"));
-        assertEquals(true, graph.BFS("D"));
-        assertEquals(true, graph.BFS("E"));
-        assertEquals(true, graph.BFS("F"));
-        assertEquals(true, graph.BFS("G"));
-        assertEquals(false, graph.BFS("I"));
+        assertTrue(graph.BFS("B"));
+        assertTrue(graph.BFS("C"));
+        assertTrue(graph.BFS("D"));
+        assertTrue(graph.BFS("E"));
+        assertTrue(graph.BFS("F"));
+        assertTrue(graph.BFS("G"));
+        assertFalse(graph.BFS("I"));
 
         assertEquals(nodeA, nodeA);
-        assertFalse(nodeA.equals(nodeB));
+        assertNotEquals(nodeA, nodeB);
     }
 }
