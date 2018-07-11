@@ -25,12 +25,6 @@ public class Node {
         }
     }
 
-    public void linkNodes(Node first, Node second) {
-
-        first.addNeighbor(second);
-        second.addNeighbor(first);
-    }
-
     public String getData() {
         return data;
     }
@@ -48,4 +42,6 @@ public class Node {
         }
         return false;
     }
+
+    public String toString() { return data; }
 }
