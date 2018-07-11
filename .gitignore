@@ -20,7 +20,6 @@
 *.idea
 *.iml
 *.csv
-*.txt
 *.db
 *.sql
 *.xml
