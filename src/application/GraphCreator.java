@@ -12,63 +12,51 @@ import java.util.Scanner;
 
 class GraphCreator{
     private ArrayList<Node> nodeList = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
     private boolean isFileFound = false;
 
-    void run(){
+    public Graph createGraphFromFile(String path) throws IOException {
         while (!isFileFound){
-            System.out.print("Enter file name: ");
-            String path = scanner.nextLine();
             createNode(path);
             createNeighbor(path);
         }
         Graph graph = buildGraph();
-        printNodeData(graph);
+        return graph;
     }
 
-    private void createNode(String path){
+    private void createNode(String path) throws IOException {
         String[] words;
 
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(path));
-            String line;
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        String line;
 
-            while (((line=br.readLine()) != null)){
-                words = line.split(" ");
-                String nodeData = words[0];
-                Node node = new Node(nodeData);
-                nodeList.add(node);
-                }
-            isFileFound = true;
-            br.close();
-
-        } catch (IOException e) {
-            System.out.println("File not exist");
+        while (((line=br.readLine()) != null)){
+            words = line.split(" ");
+            String nodeData = words[0];
+            Node node = new Node(nodeData);
+            nodeList.add(node);
         }
+        isFileFound = true;
+        br.close();
     }
 
-    private void createNeighbor(String path){
+    private void createNeighbor(String path)throws IOException {
         String[] words;
         int nodeIndex = 0;
 
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(path));
-            String line;
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        String line;
 
-            while (((line=br.readLine()) != null)){
-                words = line.split(" ");
-                for (int i = 1; i < words.length; i++){
-                    for(Node node : nodeList){
-                        if(node.getData().equals(words[i])){
-                            nodeList.get(nodeIndex).addNeighbor(node);
-                            System.out.println(node.getData()+" is Neighbor " + nodeList.get(nodeIndex).getData());
-                        }
+        while (((line=br.readLine()) != null)){
+            words = line.split(" ");
+            for (int i = 1; i < words.length; i++){
+                for(Node node : nodeList){
+                    if(node.getData().equals(words[i])){
+                        nodeList.get(nodeIndex).addNeighbor(node);
+                        System.out.println(node.getData()+" is Neighbor " + nodeList.get(nodeIndex).getData());
                     }
                 }
-                nodeIndex++;
             }
-        } catch (IOException e) {
-            System.out.println("File not exist");
+            nodeIndex++;
         }
     }
 
