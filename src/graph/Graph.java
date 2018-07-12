@@ -17,6 +17,10 @@ public class Graph {
         nodeNames = new HashSet<>();
     }
 
+    public Set<String> getNodeNames() {
+        return nodeNames;
+    }
+
     public Node getNodeByName(String name) {
 
         if (nodeNames.contains(name)) {
